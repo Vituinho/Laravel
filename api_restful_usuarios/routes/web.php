@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\UsuarioController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/usuarios', function () {
-    return view('usuarios.index');
-});
+Route::get('/usuarios', [UsuarioController::class, 'index']);
