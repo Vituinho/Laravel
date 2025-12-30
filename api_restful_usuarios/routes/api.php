@@ -9,3 +9,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('usuarios', UsuarioController::class);
+
+// ele vem com todas as rotas: index, store, show, update, destroy 
+
+// get    /usuarios          -> index
+// post   /usuarios          -> store
+// get    /usuarios/{id}     -> show
+// put    /usuarios/{id}     -> update
+// delete /usuarios/{id}     -> destroy
