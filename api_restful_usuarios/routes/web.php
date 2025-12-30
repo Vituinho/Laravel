@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/usuarios', [UsuarioController::class, 'index']);
+Route::get('/usuarios/create', [UsuarioController::class, 'create']);
