@@ -23,39 +23,13 @@ class UsuarioController extends Controller
     {
         return view('usuarios.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Usuario $usuario)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Usuario $usuario)
     {
-        //
+        return view('usuarios.edit', compact('usuario'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Usuario $usuario)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */

@@ -17,14 +17,6 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -39,27 +31,29 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Usuario $usuario)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Usuario $usuario)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+        
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255'
+        ]);
+
+        try {
+            $usuario->update($data);
+
+            return response()->json([
+                'message' => 'Usuário atualizado com sucesso!',
+                'usuario' => $usuario
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao atualizar usuário'
+            ], 500);
+        }
     }
 
     /**
@@ -67,6 +61,17 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        try {
+            $usuario->delete();
+
+            return response()->json([
+                'message' => 'Usuário deletado com sucesso!'
+            ], 200);
+
+            } catch (\Throwable $e) {
+                return response()->json([
+                    'message' => 'Erro ao deletar usuário'
+                ], 500);
+        }
     }
 }
