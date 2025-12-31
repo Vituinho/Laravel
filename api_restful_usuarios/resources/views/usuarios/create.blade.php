@@ -7,7 +7,16 @@
 </head>
 <body>
 
-<h1 class="mt-4 d-flex justify-content-center">Cadastrar usuário</h1>
+<div class="container">
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4 d-flex justify-content-center">Cadastrar usuário</h1>
+            <div class="ms-4 mt-2">
+                <a href="/usuarios" class="btn btn-secondary mt-4">Voltar para a lista</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form class="d-flex justify-content-center flex-column align-items-center mt-3" id="formUsuario">
     <input class="form-control w-25 mt-2" type="text" name="nome" placeholder="Nome" required>
@@ -15,7 +24,7 @@
     <button class="btn btn-primary mt-2" type="submit">Salvar</button>
 </form>
 
-<p id="msg"></p>
+<p class="alert" id="msg"></p>
 
 <script>
     const form = document.getElementById('formUsuario');
