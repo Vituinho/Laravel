@@ -7,5 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/usuarios', [UsuarioController::class, 'index']);
-Route::get('/usuarios/create', [UsuarioController::class, 'create']);
+Route::resource('usuarios', UsuarioController::class);
