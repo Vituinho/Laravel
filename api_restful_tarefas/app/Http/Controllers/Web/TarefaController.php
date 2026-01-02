@@ -21,23 +21,15 @@ class TarefaController extends Controller
      */
     public function create()
     {
-        //
+        return view('tarefas.create');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tarefa $tarefa)
-    {
-        //
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Tarefa $tarefa)
     {
-        //
+        return view('tarefas.edit');
     }
 
 }
