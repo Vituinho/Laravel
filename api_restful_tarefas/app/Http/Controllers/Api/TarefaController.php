@@ -22,7 +22,13 @@ class TarefaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'concluida' => 'boolean'
+        ]);
+
+        $tarefa = Tarefa::create($data);
+        return response()->json($tarefa, 201);
     }
 
     /**
