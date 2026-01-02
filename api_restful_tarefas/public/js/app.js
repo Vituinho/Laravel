@@ -20,6 +20,10 @@ function PegarTarefa() {
                     <td>${tarefa.id}</td>
                     <td>${tarefa.titulo}</td> 
                     <td>${status}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/tarefas/${tarefa.id}/edit">Editar</a>
+                        <a class="btn btn-danger" href="/tarefas/${tarefa.id}/delete">Deletar</a>
+                    </td>
                 </tr>
             `;
         });
