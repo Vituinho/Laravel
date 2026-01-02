@@ -31,13 +31,26 @@ class TarefaController extends Controller
         return response()->json($tarefa, 201);
     }
 
+    public function show($id)
+    {
+        return Tarefa::findOrFail($id);
+    }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarefa $tarefa)
+    public function update(Request $request, $id)
     {
-        //
+        $tarefa = Tarefa::findOrFail($id);
+
+        $tarefa->titulo = $request->titulo;
+        $tarefa->concluida = $request->concluida;
+
+        $tarefa->save();
+
+        return response()->json($tarefa);
     }
+
 
     /**
      * Remove the specified resource from storage.
