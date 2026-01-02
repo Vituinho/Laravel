@@ -11,7 +11,7 @@
 
     <div class="container mt-5 d-flex justify-content-between align-items-center">
         <h1>Tarefas</h1>
-        <a href="{{ route('tarefas.create') }}" class="btn btn-primary mb-3">Criar Tarefa</a>
+        <a href="/tarefas/create" class="btn btn-primary mb-3">Criar Tarefa</a>
     </div>
 
     <div class="container">
