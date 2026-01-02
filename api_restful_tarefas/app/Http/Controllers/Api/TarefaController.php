@@ -57,6 +57,8 @@ class TarefaController extends Controller
      */
     public function destroy(Tarefa $tarefa)
     {
-        //
+        $tarefa->delete();
+
+        return response()->json(null, 204);
     }
 }
