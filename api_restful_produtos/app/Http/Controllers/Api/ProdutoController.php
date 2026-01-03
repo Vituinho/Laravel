@@ -29,17 +29,20 @@ class ProdutoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Produto $produto)
+    public function show($id)
     {
-        //
+        return response()->json(
+            Produto::findOrFail($id)
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produto $produto)
+    public function update(ProdutoRequest $request, Produto $produto)
     {
-        //
+        $produto->update($request->validated());
+        return response()->json($produto);
     }
 
     /**
