@@ -32,6 +32,7 @@
 </html>
 
 <script>
+    const id = window.location.pathname.split('/')[2];
     fetch('/api/produtos')
         .then(res => res.json())
         .then(produtos => {
@@ -52,4 +53,31 @@
                 `
             })
         })
+
+    async function deletarProduto(id) {
+        if (!confirm('Tem certeza que deseja deletar este produto?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/produtos/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Produto deletado com sucesso!');
+                window.location.reload();
+            } else {
+                const result = await response.json();
+                alert('Erro ao deletar produto: ' + (result.message || 'Erro desconhecido'));
+            }
+        } 
+        catch (error) {
+            alert('Erro ao deletar produto: ' + error.message);
+        }
+
+    }
 </script>
