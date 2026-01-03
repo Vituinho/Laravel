@@ -17,6 +17,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Preço</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody id="lista">
@@ -43,6 +44,10 @@
                         <td>${produto.id}</td>
                         <td>${produto.nome}</td>
                         <td>${produto.preco}</td>
+                        <td>
+                            <a href="/produtos/${produto.id}/edit" class="btn btn-warning btn-sm">Editar</a>
+                            <button onclick="deletarProduto(${produto.id})" class="btn btn-danger btn-sm">Deletar</button>
+                        </td>
                     </tr>
                 `
             })
