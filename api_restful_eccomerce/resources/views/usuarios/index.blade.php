@@ -62,7 +62,8 @@
         let data = await response.json();
 
         if (response.ok) {
-            sessionStorage.setItem('auth_token', data.token);
+            // Guardar em cookie
+            document.cookie = `auth_token=${data.token}; path=/; max-age=86400`;
             alert('Login successful!');
             window.location.href = '/produtos'; // redirecione para página de produtos
         } else {
