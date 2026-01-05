@@ -7,5 +7,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::post('usuarios/login', [App\Http\Controllers\Api\UsuarioController::class, 'login']);
 Route::apiResource('usuarios', App\Http\Controllers\Api\UsuarioController::class);
 Route::apiResource('produtos', App\Http\Controllers\Api\ProdutoController::class);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('produtos', App\Http\Controllers\Api\ProdutoController::class);
+});
