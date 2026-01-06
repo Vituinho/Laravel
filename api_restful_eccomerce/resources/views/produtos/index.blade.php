@@ -33,8 +33,20 @@
 </html>
 
 <script>
+
     document.addEventListener('DOMContentLoaded', async () => {
         const token = document.cookie.split('; ').find(row => row.startsWith('auth_token=')).split('=')[1];
+
+        let userResponse = await fetch('http://localhost:8000/api/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        let usuarioAutenticado = await userResponse.json();
 
         let response = await fetch('http://localhost:8000/api/produtos', {
             method: 'GET',
@@ -50,6 +62,20 @@
 
         produtos.forEach(produto => {
             let row = document.createElement('tr');
+
+            let isOwner = usuarioAutenticado.id === produto.user_id;
+            let acoes = '';
+
+            if (isOwner) {
+                acoes = `
+                    <a href="/produtos/${produto.id}/edit" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="/produtos/${produto.id}/delete" class="btn btn-sm btn-danger">Excluir</a>
+                `;
+            } else {
+                acoes = '<span class="text-muted">Nenhuma ação disponível</span>';
+            }
+
+
             row.innerHTML = `
                 <td>${produto.id}</td>
                 <td>${produto.nome}</td>
@@ -57,8 +83,7 @@
                 <td>${produto.preco}</td>
                 <td>${produto.user.name}</td>
                 <td>
-                <a href="/produtos/${produto.id}/edit" class="btn btn-sm btn-primary">Editar</a>
-                <a href="/produtos/${produto.id}/delete" class="btn btn-sm btn-danger">Excluir</a>
+                    ${acoes}
                 </td>
             `;
             produtoList.appendChild(row);
