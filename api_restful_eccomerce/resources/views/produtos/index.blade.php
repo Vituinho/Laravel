@@ -57,8 +57,8 @@
                 <td>${produto.preco}</td>
                 <td>${produto.user.name}</td>
                 <td>
-                <button class="btn btn-sm btn-primary">Editar</button>
-                <button class="btn btn-sm btn-danger">Excluir</button>
+                <a href="/produtos/${produto.id}/edit" class="btn btn-sm btn-primary">Editar</a>
+                <a href="/produtos/${produto.id}/delete" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             `;
             produtoList.appendChild(row);
