@@ -32,23 +32,44 @@
 </html>
 
 <script>
-    
     const id = window.location.pathname.split('/')[2];
     const form = document.getElementById('produto-form');
     const token = document.cookie.split('; ').find(row => row.startsWith('auth_token=')).split('=')[1];
 
-    fetch(`http://localhost:8000/api/produtos/${id}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${token}`
+    document.addEventListener('DOMContentLoaded', async () => {
+        let userResponse = await fetch('http://localhost:8000/api/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        let usuarioAutenticado = await userResponse.json();
+
+        let produtoResponse = await fetch(`http://localhost:8000/api/produtos/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        let produtoData = await produtoResponse.json();
+
+        // Verificação com comparação numérica
+        if (parseInt(usuarioAutenticado.id) !== parseInt(produtoData.user_id)) {
+            alert('Você não tem permissão para editar este produto.');
+            window.location.href = '/produtos';
+            return;
         }
-    })
-    .then(response => response.json())
-    .then(produto => {
-        document.getElementById('nome').value = produto.nome;
-        document.getElementById('descricao').value = produto.descricao;
-        document.getElementById('preco').value = produto.preco;
+
+        // Preencher o formulário
+        document.getElementById('nome').value = produtoData.nome;
+        document.getElementById('descricao').value = produtoData.descricao;
+        document.getElementById('preco').value = produtoData.preco;
     });
 
     form.addEventListener('submit', async (e) => {
