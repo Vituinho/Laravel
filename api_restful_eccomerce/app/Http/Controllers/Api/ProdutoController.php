@@ -22,7 +22,8 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produto = Produto::create($request->validated());
+        return response()->json($produto, 201);
     }
 
     /**

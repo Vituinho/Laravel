@@ -8,6 +8,60 @@
 </head>
 <body>
     
+    <div class="container mt-5">
+        <h1>Cadastrar Produto</h1>
+        <form id="produto-form">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="preco" class="form-label">Preço</label>
+                <input type="number" step="0.01" class="form-control" id="preco" name="preco" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
+
+<script>
+    
+    const form = document.getElementById('produto-form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const token = document.cookie.split('; ').find(row => row.startsWith('auth_token=')).split('=')[1];
+
+        const formData = {
+            nome: document.getElementById('nome').value,
+            descricao: document.getElementById('descricao').value,
+            preco: document.getElementById('preco').value
+        };
+
+        let response = await fetch('http://localhost:8000/api/produtos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            alert('Produto cadastrado com sucesso!');
+            window.location.href = '/produtos';
+        } else {
+            alert('Erro ao cadastrar produto.');
+        }
+    });
+
+</script>

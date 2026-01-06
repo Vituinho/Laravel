@@ -8,7 +8,10 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Lista de Produtos</h2>
+        <div class="justify-content-between d-flex">
+            <h1>Produtos</h1>
+            <a href="/produtos/create" class="btn btn-primary align-self-center">Cadastrar Produto</a>
+        </div>
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -16,7 +19,7 @@
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th>Preço</th>
-                    <th>ID do Usuário</th>
+                    <th>Nome do Usuário</th>
                     <th>Ações</th>
                 </tr>
             </thead>
