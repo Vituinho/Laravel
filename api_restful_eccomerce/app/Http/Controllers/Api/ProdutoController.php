@@ -47,7 +47,9 @@ class ProdutoController extends Controller
      */
     public function update(ProdutoRequest $request, Produto $produto)
     {
-        
+        $data = $request->validated();
+        $produto->update($data);
+        return response()->json($produto);
     }
 
     /**
