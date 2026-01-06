@@ -33,17 +33,20 @@ class UsuarioController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (auth()->attempt($credentials)) {
-            $user = auth()->user();
-            $token = $user->createToken('auth_token')->plainTextToken;
-
+        if (!Auth::attempt($credentials)) {
             return response()->json([
-                'user' => $user,
-                'token' => $token
-            ], 200);
-        } else {
-            return response()->json(['message' => 'Unauthorized'], 401);
+                'message' => 'Credenciais inválidas'
+            ], 401);
         }
+
+        $user = Auth::user();
+
+        $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ]);
     }
 
     /**

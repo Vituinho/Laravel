@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Models\Produto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProdutoRequest;
+use App\Models\User;
 
 class ProdutoController extends Controller
 {
@@ -20,9 +24,13 @@ class ProdutoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProdutoRequest $request)
     {
-        $produto = Produto::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = $request->user()->id;
+
+        $produto = Produto::create($data);
+
         return response()->json($produto, 201);
     }
 
@@ -37,7 +45,7 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produto $produto)
+    public function update(ProdutoRequest $request, Produto $produto)
     {
         //
     }
