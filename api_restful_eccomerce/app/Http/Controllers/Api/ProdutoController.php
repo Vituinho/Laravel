@@ -17,7 +17,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::with('user')->get();
+        $produtos = Produto::with('user')->orderBy('created_at', 'desc')->get();
         return response()->json($produtos);
     }
 
@@ -39,7 +39,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        
     }
 
     /**
@@ -47,7 +47,7 @@ class ProdutoController extends Controller
      */
     public function update(ProdutoRequest $request, Produto $produto)
     {
-        //
+        
     }
 
     /**
