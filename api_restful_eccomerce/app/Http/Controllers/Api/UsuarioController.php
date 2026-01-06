@@ -49,14 +49,14 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show(User $usuario)
     {
         return response()->json($usuario);
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(UsuarioRequest $request, Usuario $usuario)
+    public function update(UsuarioRequest $request, User $usuario)
     {
         //
     }

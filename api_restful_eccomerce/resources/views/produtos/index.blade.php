@@ -52,7 +52,7 @@
                 <td>${produto.nome}</td>
                 <td>${produto.descricao}</td>
                 <td>${produto.preco}</td>
-                <td>${produto.user_id}</td>
+                <td>${produto.user.name}</td>
                 <td>
                 <button class="btn btn-sm btn-primary">Editar</button>
                 <button class="btn btn-sm btn-danger">Excluir</button>

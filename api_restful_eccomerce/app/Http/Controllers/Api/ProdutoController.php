@@ -13,7 +13,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return response()->json(Produto::all());
+        $produtos = Produto::with('user')->get();
+        return response()->json($produtos);
     }
 
     /**
