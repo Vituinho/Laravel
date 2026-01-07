@@ -33,9 +33,30 @@
 </html>
 
 <script>
+    const token = document.cookie.split('; ').find(row => row.startsWith('auth_token=')).split('=')[1];
+
+    async function DeletarProduto(e, produtoId) {
+        e.preventDefault();
+        if (confirm('Tem certeza que deseja excluir este produto?')) {
+            let deleteResponse = await fetch(`http://localhost:8000/api/produtos/${produtoId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (deleteResponse.ok) {
+                alert('Produto excluído com sucesso.');
+                window.location.reload();
+            } else {
+                alert('Erro ao excluir o produto.');
+            }
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', async () => {
-        const token = document.cookie.split('; ').find(row => row.startsWith('auth_token=')).split('=')[1];
 
         let userResponse = await fetch('http://localhost:8000/api/user', {
             method: 'GET',
@@ -69,12 +90,11 @@
             if (isOwner) {
                 acoes = `
                     <a href="/produtos/${produto.id}/edit" class="btn btn-sm btn-primary">Editar</a>
-                    <a href="/produtos/${produto.id}/delete" class="btn btn-sm btn-danger">Excluir</a>
+                    <button onclick="DeletarProduto(event, ${produto.id})" class="btn btn-sm btn-danger">Excluir</button>
                 `;
             } else {
                 acoes = '<span class="text-muted">Nenhuma ação disponível</span>';
             }
-
 
             row.innerHTML = `
                 <td>${produto.id}</td>
