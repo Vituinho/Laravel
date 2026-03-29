@@ -29,4 +29,12 @@ class TaskController extends Controller
 
         return new TaskResource($task);
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Task $task)
+    {
+        return new TaskResource($task);
+    }
 }
