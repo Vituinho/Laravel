@@ -47,4 +47,14 @@ class TaskController extends Controller
 
         return new TaskResource($task);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Task $task)
+    {
+        $task->delete();
+
+        return response()->json(['message' => 'Tarefa deletada!']);
+    }
 }
