@@ -37,4 +37,14 @@ class TaskController extends Controller
     {
         return new TaskResource($task);
     }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(TaskRequest $request, Task $task)
+    {
+        $task->update($request->validated());
+
+        return new TaskResource($task);
+    }
 }
